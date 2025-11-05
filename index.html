@@ -3,298 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Circuit-Switched Voice Calls</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-        .container { max-width: 900px; }
-        .user-card { transition: transform 0.2s; }
-        .user-card:hover { transform: scale(1.05); }
-        .call-status { position: fixed; top: 20px; right: 20px; z-index: 1050; }
-        #local-audio, #remote-audio { width: 100%; margin: 10px 0; display: none; } /* Hidden for audio-only */
-        .wave { animation: wave 1s ease-in-out infinite alternate; }
-        @keyframes wave { from { opacity: 0.5; } to { opacity: 1; } }
-    </style>
+    <title>Library</title>
+    <link rel="stylesheet" href="style.css"/>
 </head>
-<body class="text-white">
-    <div class="container mt-4">
-        <h1 class="text-center mb-4">🎤 Circuit-Switched Voice Calls</h1>
-        <p class="text-center">Current User ID: <strong id="current-user-id">-</strong></p>
-
-        <div class="row mb-4">
-            <div class="col">
-                <div class="card bg-dark text-white">
-                    <div class="card-header">Available Users</div>
-                    <div class="card-body">
-                        <div class="row" id="users-list"></div>
-                    </div>
+<body>
+    
+    <div class="app">
+        <div class="profile">
+            <div class="profile-header">
+                <span class="profile-email">me@gmail.com</span>
+                <span class="profile-dropdown">v</span>
+            </div>
+            <div class="section view active" id="view">
+             <div class="profile-details">
+                <div class="profile-avatar">
+                    <img src="download.jpeg" alt="user-image">
                 </div>
+                <div class="profile-name">
+                    <h4>Me User</h4>
+                </div>
+                <div class="profile-bio">
+                    <span>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, animi. Minus recusandae adipisci molestiae iusto beatae sunt officia reprehenderit quia velit ad excepturi tempore fuga cupiditate consequatur, dolorum laboriosam aliquid!
+                    </span>
+                </div>
+                <div class="profile-number">
+                    <span>+01 9567895473</span>
+                </div>
+                <div class="profile-stat">
+                    <span class="post-count count">
+                        <h4>0</h4>
+                        <span>Posts</span>
+                    </span>
+                    <span class="followers-count count">
+                        <h4>0</h4>
+                        <span>followers</span>
+                    </span>
+                    <span class="following-count count">
+                        <h4>0</h4>
+                        <span>following</span>
+                    </span>
+                </div>
+             </div>
+             <div class="profile-footer">
+                <span class="account-info">Account Info</span>
+                <span class="edit-profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" id="svg5288"><style id="style5282"></style><path d="M8 7c-.1292196 0-.2582658.041082-.3572481.1396656L4.2265736 10.383234l-1.379877 1.304048c-.1979645.187314-.1979645.489646 0 .678603l1.379877 1.307992 3.4161783 3.243568c.1979645.187313.5165409.187313.7144875 0l1.3798772-1.308075c.197965-.187314.197965-.489644 0-.678601l-3.058934-2.904598 3.058934-2.9004888c.197965-.1873128.197965-.490466 0-.6786005L8.3572529 7.1390063c-.0990086-.0928345-.2280714-.1396657-.3572394-.1396657z" id="rect931" stroke-width=".20000002" stroke-linecap="round" stroke-linejoin="round"/><path id="path8177" d="M14 7c.129219 0 .258265.041082.357248.1396656l3.416178 3.2435684 1.379877 1.304048c.197965.187314.197965.489646 0 .678603l-1.379877 1.307992-3.416178 3.243568c-.197965.187313-.516541.187313-.714488 0l-1.379877-1.308075c-.197965-.187314-.197965-.489644 0-.678601l3.058934-2.904598-3.058934-2.9004888c-.197965-.1873128-.197965-.490466 0-.6786005l1.379864-1.3080754c.09901-.092835.228071-.1396657.357239-.1396657z" stroke-width=".20000002" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+             </div>
+            </div>
+            <div class="section post-manage" id="postManage">
+             Post Section
+            </div>
+            <div class="section account" id="account">
+             Account Center
+            </div>
+            <div class="section edit" id="edits">
+             Editing
             </div>
         </div>
-
-        <div id="call-controls" class="row hidden">
-            <div class="col">
-                <div class="card bg-primary text-white">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <span>Call Controls</span>
-                        <span id="status" class="badge bg-light text-dark">Ready</span>
-                    </div>
-                    <div class="card-body text-center">
-                        <button id="start-call" class="btn btn-success btn-lg me-2">📞 Start Voice Call</button>
-                        <button id="end-call" class="btn btn-danger btn-lg" disabled>📞 End Call</button>
-                        <div id="call-log" class="mt-3 small"></div>
-                    </div>
+        <div class="feed">
+            <header>
+                <div class="logo">
+                    <span class="logo-icon">
+                        <svg width="22" height="22" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="22" cy="22" r="22" fill="#F7DF1E"/>
+<path d="M12.032 23.008V22.924V23.008ZM20.516 23.82L16.988 20.264L18.164 19.06L21.916 22.84L25.584 19.144L26.788 20.32L23.232 23.876L26.788 27.432L25.584 28.608L21.86 24.828L18.164 28.524L16.988 27.348L20.516 23.82ZM27.768 13.824V15H29.336L32.64 11.696L33.816 12.872L30.68 16.008L30.708 16.092C31.4173 17.94 31.7627 19.8533 31.744 21.832C31.744 22.224 31.7347 22.616 31.716 23.008V23.092H35.832V24.744H31.492V24.828C31.1373 26.7507 30.4747 28.468 29.504 29.98L29.448 30.092L33.424 34.124L32.248 35.3L28.44 31.464L28.328 31.576C27.432 32.5653 26.4333 33.3307 25.332 33.872C24.2493 34.4133 23.1013 34.684 21.888 34.684C20.6933 34.684 19.536 34.404 18.416 33.844C17.3147 33.284 16.3253 32.5 15.448 31.492L15.336 31.352L11.584 35.104L10.408 33.928L14.328 30.008L14.272 29.896C13.3387 28.384 12.6947 26.6947 12.34 24.828V24.772H8V23.092H12.116V23.008C12.0973 22.616 12.088 22.224 12.088 21.832C12.088 19.8347 12.424 17.9493 13.096 16.176L13.124 16.064L9.904 12.844L11.08 11.668L14.412 15H16.092V13.824C16.092 12.7787 16.3533 11.808 16.876 10.912C17.3987 10.016 18.0987 9.30666 18.976 8.784C19.872 8.26133 20.852 8 21.916 8C22.98 8 23.9507 8.26133 24.828 8.784C25.724 9.30666 26.4333 10.016 26.956 10.912C27.4973 11.808 27.768 12.7787 27.768 13.824ZM17.744 13.824V15H26.088V13.824C26.088 13.0773 25.9013 12.3867 25.528 11.752C25.1547 11.1173 24.6507 10.6133 24.016 10.24C23.3813 9.86667 22.6813 9.68 21.916 9.68C21.1693 9.68 20.4693 9.86667 19.816 10.24C19.1813 10.6133 18.6773 11.1173 18.304 11.752C17.9307 12.3867 17.744 13.0773 17.744 13.824ZM29.196 16.792L29.14 16.68H14.692L14.636 16.792C14.0387 18.416 13.7493 20.096 13.768 21.832C13.768 23.4 13.992 24.9027 14.44 26.34C14.888 27.684 15.5133 28.8693 16.316 29.896C17.0813 30.904 17.94 31.6787 18.892 32.22C19.8627 32.7427 20.8707 33.004 21.916 33.004C22.9613 33.004 23.96 32.7427 24.912 32.22C25.8827 31.6787 26.76 30.904 27.544 29.896C28.328 28.8693 28.944 27.684 29.392 26.34C29.8587 24.9027 30.092 23.4 30.092 21.832C30.092 20.04 29.7933 18.36 29.196 16.792Z" fill="black"/>
+</svg>
+                    </span>
+                    <h5>Card Like Vision</h5>
                 </div>
-            </div>
-        </div>
 
-        <audio id="local-audio" autoplay muted></audio>
-        <audio id="remote-audio" autoplay></audio>
-    </div>
-
-    <!-- Incoming Call Modal -->
-    <div class="modal fade" id="incomingModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark text-white">
-                <div class="modal-header">
-                    <h5 class="modal-title">Incoming Call</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                <div class="header-icons">
+                    <span class="i-chat">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 640 640"><!--!Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M416 208C416 305.2 330 384 224 384C197.3 384 171.9 379 148.8 370L67.2 413.2C57.9 418.1 46.5 416.4 39 409C31.5 401.6 29.8 390.1 34.8 380.8L70.4 313.6C46.3 284.2 32 247.6 32 208C32 110.8 118 32 224 32C330 32 416 110.8 416 208zM416 576C321.9 576 243.6 513.9 227.2 432C347.2 430.5 451.5 345.1 463 229.3C546.3 248.5 608 317.6 608 400C608 439.6 593.7 476.2 569.6 505.6L605.2 572.8C610.1 582.1 608.4 593.5 601 601C593.6 608.5 582.1 610.2 572.8 605.2L491.2 562C468.1 571 442.7 576 416 576z"/></svg>
+                    </span>
+                    <span class="i-history">
+                        <svg version="1.2" baseProfile="tiny" id="Layer_1" width="22" height="22" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" viewBox="278.3 140.4 40.6 40.6" xml:space="preserve">
+<g id="background">
+	
+		<rect x="-7379.6" y="-23652.8" fill="#FFFFFF" stroke="#231F20" stroke-width="8" stroke-miterlimit="10" width="23395.3" height="50447.1"/>
+</g>
+<g id="circles">
+</g>
+<g id="canvas">
+</g>
+<g id="labels">
+</g>
+<g id="lines_-_originals">
+	<circle fill="none" stroke="#000000" stroke-width="1.1266" stroke-miterlimit="10" cx="298.6" cy="160.8" r="19.8"/>
+	<polyline fill="none" stroke="#000000" stroke-width="1.1266" stroke-miterlimit="10" points="298.6,145.6 298.6,161.9 
+		289.2,168.3 	"/>
+</g>
+<g id="_x40_FrameExport">
+</g>
+<g id="icons">
+</g>
+<g id="icon_backup" display="none">
+</g>
+<g id="backup">
+</g>
+</svg>
+                    </span>
                 </div>
-                <div class="modal-body text-center">
-                    <div class="wave mb-3">📞</div>
-                    <p><strong id="caller-name">-</strong> is calling you!</p>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button id="accept-call" class="btn btn-success me-2">Accept</button>
-                    <button id="reject-call" class="btn btn-danger" data-bs-dismiss="modal">Reject</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Config
-        const API_BASE = '/api';
-        const TOKEN = localStorage.getItem('authToken');
-        if (!TOKEN) { alert('Login first!'); throw new Error('No token'); }
-        const headers = { Authorization: `Bearer ${TOKEN}` };
-        const WS_URL = `ws://10.218.76.230:3000?token=${TOKEN}`; // Include token for auth
-
-        // State
-        let currentUserId = null;
-        let selectedUserId = null;
-        let ws = null;
-        let localStream = null;
-        let peerConnection = null;
-        const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
-        const logEl = document.getElementById('call-log');
-
-        // DOM
-        const usersList = document.getElementById('users-list');
-        const currentUserEl = document.getElementById('current-user-id');
-        const callControls = document.getElementById('call-controls');
-        const statusEl = document.getElementById('status');
-        const localAudio = document.getElementById('local-audio');
-        const remoteAudio = document.getElementById('remote-audio');
-        const incomingModal = new bootstrap.Modal(document.getElementById('incomingModal'));
-        const callerNameEl = document.getElementById('caller-name');
-
-        // Utils
-        function log(msg) { logEl.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${msg}</div>`; console.log(msg); }
-        function updateStatus(text, color = 'light') { statusEl.textContent = text; statusEl.className = `badge bg-${color} text-dark`; }
-        function connectWS() {
-            ws = new WebSocket(WS_URL);
-            ws.onopen = () => { 
-                log('WS connected'); 
-                if (currentUserId) {
-                    ws.send(JSON.stringify({ type: 'join', userId: currentUserId })); 
-                }
-            };
-            ws.onmessage = handleMessage;
-            ws.onclose = () => { log('WS disconnected'); setTimeout(connectWS, 3000); };
-            ws.onerror = (err) => log('WS error: ' + err);
-        }
-
-        function handleMessage(event) {
-            const msg = JSON.parse(event.data);
-            switch (msg.type) {
-                case 'offer':
-                    showIncomingCall(msg.from, msg.data);
-                    break;
-                case 'answer':
-                    if (peerConnection) {
-                        peerConnection.setRemoteDescription(new RTCSessionDescription(msg.data));
-                        log('Answer received');
-                    }
-                    break;
-                case 'ice-candidate':
-                    if (peerConnection) {
-                        peerConnection.addIceCandidate(new RTCIceCandidate(msg.data));
-                        log('ICE candidate received');
-                    }
-                    break;
-                case 'reject':
-                    endCall();
-                    log('Call rejected');
-                    break;
-                case 'end':
-                    endCall();
-                    log('Call ended by other party');
-                    break;
-            }
-        }
-
-        async function fetchCurrentUser() {
-            try {
-                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-                const res = await fetch(`${API_BASE}/users/${currentUser.id}`, { headers });
-                const user = await res.json();
-                currentUserId = user.id;
-                currentUserEl.textContent = currentUserId;
-                connectWS(); // Initialize WebSocket after setting currentUserId
-            } catch (err) {
-                console.error('Failed to fetch current user:', err);
-            }
-        }
-
-        async function fetchUsers() {
-            try {
-                const res = await fetch(`${API_BASE}/users`, { headers });
-                const users = await res.json();
-                renderUsers(users);
-            } catch (err) { console.error(err); }
-        }
-
-        function renderUsers(users) {
-            usersList.innerHTML = users.map(user => `
-                <div class="col-md-4 mb-3">
-                    <div class="card user-card bg-secondary text-white h-100" data-id="${user.id}">
-                        <img src="${user.profileImage || '/default-avatar.png'}" class="card-img-top rounded-circle mx-auto mt-3" width="80" height="80" alt="${user.name}">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">${user.name}</h5>
-                            <p class="card-text">${user.bio?.substring(0, 50) || ''}...</p>
-                            <small>ID: ${user.id} | Following: ${user.isFollowing ? 'Yes' : 'No'}</small>
+            </header>
+            <div class="main-content">
+                <div class="user-card">
+                    <div class="card-header">
+                        <div class="user-avatar">
+                            <img src="images (7).jpeg" alt="image">
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name">
+                                <h5>Example User</h5>
+                            </div>
+                            <span class="user-bio">
+                               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae dolores voluptate harum error perferendis sed modi impedit. Soluta, ea. Vitae illo saepe delectus incidunt nemo at molestias eum voluptate quia. 
+                            </span>
                         </div>
                     </div>
+                    <div class="card-action">
+                        <button class="action-btn">Call</button>
+                        <button class="action-btn fill">Email</button>
+                    </div>
                 </div>
-            `).join('');
+                <div class="user-card">
+                    <div class="card-header">
+                        <div class="user-avatar">
+                            <img src="images (6).jpeg" alt="image">
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name">
+                                <h5>Example User</h5>
+                            </div>
+                            <span class="user-bio">
+                               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae dolores voluptate harum error perferendis sed modi impedit. Soluta, ea. Vitae illo saepe delectus incidunt nemo at molestias eum voluptate quia. 
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button class="action-btn">Call</button>
+                        <button class="action-btn fill">Email</button>
+                    </div>
+                </div>
+                <div class="user-card">
+                    <div class="card-header">
+                        <div class="user-avatar">
+                            <img src="images (5).jpeg" alt="image">
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name">
+                                <h5>Example User</h5>
+                            </div>
+                            <span class="user-bio">
+                               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae dolores voluptate harum error perferendis sed modi impedit. Soluta, ea. Vitae illo saepe delectus incidunt nemo at molestias eum voluptate quia. 
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button class="action-btn">Call</button>
+                        <button class="action-btn fill">Email</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-container">
+        <div class="dropdown">
+            <div class="dropdown-header">
+                <div class="dropdown-title">
+                    <h5>Menu</h5>
+                </div>
+                <div class="close-dropdown" style="cursor: pointer;">
+                    <span>&times;</span>
+                </div>
+            </div>
+            <div class="dropdown-content">
+            <div class="dropdown-item" value="view">
+                <svg width="25" height="25" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2 2L1 3V13L2 14H14L15 13V3L14 2H2ZM2 13V3H14V13H2ZM12 5H4V6H12V5ZM3 4V7H13V4H3ZM7 9H3V8H7V9ZM3 12H7V11H3V12ZM12 9H10V11H12V9ZM9 8V12H13V8H9Z" fill="#C5C5C5"/>
+                </svg>
+                <span>Profile</span>
+            </div>
+            <div class="dropdown-item" value="postManage">
+                <svg xmlns='http://www.w3.org/2000/svg' version='1.1' width="25" height="25" viewBox="0 0 10 10">
+	<style>
+    circle {
+      animation: ball 0.6s linear infinite;
+    }
 
-            document.querySelectorAll('.user-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    document.querySelectorAll('.user-card').forEach(c => c.classList.remove('border-primary'));
-                    card.classList.add('border-primary');
-                    selectedUserId = parseInt(card.dataset.id);
-                    callControls.classList.remove('hidden');
-                });
-            });
-        }
+    circle:nth-child(2) { animation-delay: 0.075s; }
+    circle:nth-child(3) { animation-delay: 0.15s; }
+    circle:nth-child(4) { animation-delay: 0.225s; }
+    circle:nth-child(5) { animation-delay: 0.3s; }
+    circle:nth-child(6) { animation-delay: 0.375s; }
+    circle:nth-child(7) { animation-delay: 0.45s; }
+    circle:nth-child(8) { animation-delay: 0.525s; }
 
-        async function getLocalStream() {
-            if (localStream) return;
-            localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            localAudio.srcObject = localStream;
-            log('Mic accessed');
-        }
+    @keyframes ball {
+      from { opacity: 1; }
+      to { opacity: 0.3; }
+    }
+	</style>
+	<g style="fill:grey;">
+		<circle cx='5' cy='1' r='1' style='opacity:0.3;' />
+		<circle cx='7.8284' cy='2.1716' r='1' style='opacity:0.3;' />
+		<circle cx='9' cy='5' r='1' style='opacity:0.3;' />
+		<circle cx='7.8284' cy='7.8284' r='1' style='opacity:0.3;' />
+		<circle cx='5' cy='9' r='1' style='opacity:0.3;' />
+		<circle cx='2.1716' cy='7.8284' r='1' style='opacity:0.3;' />
+		<circle cx='1' cy='5' r='1' style='opacity:0.3;' />
+		<circle cx='2.1716' cy='2.1716' r='1' style='opacity:0.3;' />
+	</g>
+                </svg>
 
-        function createPeerConnection() {
-            peerConnection?.close();
-            peerConnection = new RTCPeerConnection(configuration);
-            localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
-            peerConnection.ontrack = (e) => { remoteAudio.srcObject = e.streams[0]; log('Remote stream connected'); };
-            peerConnection.onicecandidate = (e) => {
-                if (e.candidate && ws && ws.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify({ type: 'ice-candidate', to: selectedUserId, data: e.candidate }));
-                }
-            };
-            peerConnection.onconnectionstatechange = () => {
-                const state = peerConnection.connectionState;
-                log(`Connection: ${state}`);
-                updateStatus(state === 'connected' ? 'Connected' : state, state === 'connected' ? 'success' : 'warning');
-                if (state === 'connected') document.getElementById('end-call').disabled = false;
-                if (state === 'failed') endCall();
-            };
-        }
-
-        async function startCall() {
-            if (!selectedUserId) return alert('Select a user!');
-            if (!ws || ws.readyState !== WebSocket.OPEN) {
-                alert('WebSocket not connected. Please wait and try again.');
-                return;
-            }
-            await getLocalStream();
-            createPeerConnection();
-            const offer = await peerConnection.createOffer();
-            await peerConnection.setLocalDescription(offer);
-            ws.send(JSON.stringify({ type: 'offer', to: selectedUserId, data: offer, from: currentUserId }));
-            log('Offer sent');
-            updateStatus('Calling...', 'warning');
-            document.getElementById('start-call').disabled = true;
-        }
-
-        function showIncomingCall(callerId, offer) {
-            selectedUserId = callerId; // Set for response
-            callerNameEl.textContent = `User ${callerId}`; // Fetch name via API if needed
-            incomingModal.show();
-            // Store offer for accept
-            window.pendingOffer = offer;
-        }
-
-        async function acceptCall() {
-            if (!ws || ws.readyState !== WebSocket.OPEN) {
-                alert('WebSocket not connected. Cannot accept call.');
-                incomingModal.hide();
-                return;
-            }
-            await getLocalStream();
-            createPeerConnection();
-            await peerConnection.setRemoteDescription(new RTCSessionDescription(window.pendingOffer));
-            const answer = await peerConnection.createAnswer();
-            await peerConnection.setLocalDescription(answer);
-            ws.send(JSON.stringify({ type: 'answer', to: selectedUserId, data: answer, from: currentUserId }));
-            log('Answer sent');
-            incomingModal.hide();
-            updateStatus('Connected', 'success');
-            document.getElementById('end-call').disabled = false;
-            document.getElementById('start-call').disabled = true;
-        }
-
-        function rejectCall() {
-            if (ws && ws.readyState === WebSocket.OPEN) {
-                ws.send(JSON.stringify({ type: 'reject', to: selectedUserId, from: currentUserId }));
-            }
-            incomingModal.hide();
-            updateStatus('Rejected', 'danger');
-        }
-
-        function endCall() {
-            localStream?.getTracks().forEach(track => track.stop());
-            localStream = null;
-            peerConnection?.close();
-            peerConnection = null;
-            localAudio.srcObject = null;
-            remoteAudio.srcObject = null;
-            if (ws && ws.readyState === WebSocket.OPEN && selectedUserId) {
-                ws.send(JSON.stringify({ type: 'end', to: selectedUserId, from: currentUserId }));
-            }
-            document.getElementById('start-call').disabled = false;
-            document.getElementById('end-call').disabled = true;
-            updateStatus('Ready', 'light');
-            log('Call ended');
-        }
-
-        // Events
-        document.getElementById('start-call').addEventListener('click', startCall);
-        document.getElementById('end-call').addEventListener('click', endCall);
-        document.getElementById('accept-call').addEventListener('click', acceptCall);
-        document.getElementById('reject-call').addEventListener('click', rejectCall);
-
-        // Init
-        async function init() {
-            await fetchCurrentUser();
-            await fetchUsers();
-        }
-        init();
-    </script>
+                <span>Manage Posts</span>
+            </div>
+            <div class="dropdown-item" value="account">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16" fill="none">
+                    <path d="M12.11745 5.343985c-.1003-.31445-.2507-.60384-.4512-.86816l1.3535-1.36036-.6152-.61523-1.3604 1.35352c-.2643-.20053-.5537-.35092-.8681-.45118-.3099-.10481-.6312-.15722-.9639-.15722-.4056 0-.79751.07747-1.17577.23242-.3737.15495-.7041.37598-.99121.66308l-1.54492 1.55176 4.3271 4.32715 1.5518-1.54492c.2871-.28711.5081-.61751.6631-.99121.1549-.37826.2324-.77018.2324-1.17578 0-.33269-.0524-.65397-.1572-.96387zm-.8887 1.80469c-.1094.26432-.2666.49902-.4717.7041l-.9297.92969-3.0898-3.08985.92969-.92968c.20508-.20508.43978-.36231.7041-.47168.26891-.11394.54911-.1709.84081-.1709.3008 0 .5833.05924.8477.17773.2643.11393.4944.27116.6904.47168.2005.19596.3577.42611.4717.69043.1185.26432.1777.54688.1777.84766 0 .29166-.057.57194-.1709.84082zM5.19253 5.93009L3.64077 7.47501c-.2871.28711-.50813.61979-.66308.99805-.15495.37369-.23242.76334-.23242 1.16894 0 .3327.05013.6563.15039.9707.10482.3099.25748.597.45801.8613l-1.35352 1.3604.61523.6152 1.36036-1.3535c.26432.2005.55143.3532.86132.458.31446.1003.63802.1504.97071.1504.4056 0 .79524-.0775 1.16894-.2324.37826-.155.71094-.376.99805-.6631l1.54492-1.5518-4.32715-4.32711zm1.44922 5.73531c-.26432.1094-.54232.1641-.83398.1641-.30078 0-.58561-.057-.8545-.1709-.26432-.1139-.49674-.2689-.69726-.4648-.19596-.2006-.35091-.433-.46484-.6973-.11394-.2689-.1709-.5537-.1709-.8545 0-.2917.05468-.5697.16406-.83398.11393-.26888.27344-.50586.47852-.71094l.92968-.92969 3.08985 3.08981-.92969.9297c-.20508.2051-.44206.3646-.71094.4785z" clip-rule="evenodd" fill="#89D185" fill-rule="evenodd"/>
+                </svg>
+                <span>Switch Account</span>
+            </div>
+            <div class="logout-item" value="logout">
+                <svg width="25" height="25" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.6172 3.84375C13.5169 3.5293 13.3665 3.23991 13.166 2.97559L14.5195 1.61523L13.9043 1L12.5439 2.35352C12.2796 2.15299 11.9902 2.0026 11.6758 1.90234C11.3659 1.79753 11.0446 1.74512 10.7119 1.74512C10.3063 1.74512 9.91439 1.82259 9.53613 1.97754C9.16243 2.13249 8.83203 2.35352 8.54492 2.64062L7 4.19238L11.3271 8.51953L12.8789 6.97461C13.166 6.6875 13.387 6.3571 13.542 5.9834C13.6969 5.60514 13.7744 5.21322 13.7744 4.80762C13.7744 4.47493 13.722 4.15365 13.6172 3.84375ZM12.7285 5.64844C12.6191 5.91276 12.4619 6.14746 12.2568 6.35254L11.3271 7.28223L8.2373 4.19238L9.16699 3.2627C9.37207 3.05762 9.60677 2.90039 9.87109 2.79102C10.14 2.67708 10.4202 2.62012 10.7119 2.62012C11.0127 2.62012 11.2952 2.67936 11.5596 2.79785C11.8239 2.91178 12.054 3.06901 12.25 3.26953C12.4505 3.46549 12.6077 3.69564 12.7217 3.95996C12.8402 4.22428 12.8994 4.50684 12.8994 4.80762C12.8994 5.09928 12.8424 5.37956 12.7285 5.64844ZM7.9043 10.6416L9.3877 9.09668L8.77246 8.47461L7.28223 10.0264L5.42285 8.16699L6.91309 6.61523L6.29102 6L4.80762 7.54492L4.19238 6.92969L2.64062 8.47461C2.35352 8.76172 2.13249 9.0944 1.97754 9.47266C1.82259 9.84635 1.74512 10.236 1.74512 10.6416C1.74512 10.9743 1.79525 11.2979 1.89551 11.6123C2.00033 11.9222 2.15299 12.2093 2.35352 12.4736L1 13.834L1.61523 14.4492L2.97559 13.0957C3.23991 13.2962 3.52702 13.4489 3.83691 13.5537C4.15137 13.654 4.47493 13.7041 4.80762 13.7041C5.21322 13.7041 5.60286 13.6266 5.97656 13.4717C6.35482 13.3167 6.6875 13.0957 6.97461 12.8086L8.51953 11.2568L7.9043 10.6416ZM5.6416 12.665C5.37728 12.7744 5.09928 12.8291 4.80762 12.8291C4.50684 12.8291 4.22201 12.7721 3.95312 12.6582C3.6888 12.5443 3.45638 12.3893 3.25586 12.1934C3.0599 11.9928 2.90495 11.7604 2.79102 11.4961C2.67708 11.2272 2.62012 10.9424 2.62012 10.6416C2.62012 10.3499 2.6748 10.0719 2.78418 9.80762C2.89811 9.53874 3.05762 9.30176 3.2627 9.09668L4.19238 8.16699L7.28223 11.2568L6.35254 12.1865C6.14746 12.3916 5.91048 12.5511 5.6416 12.665Z" fill="#F48771"/>
+                </svg>
+                <span>Logout</span>
+            </div>
+            </div>
+        </div>
+        <div class="modal logout">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <svg width="18" height="28" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.6172 3.84375C13.5169 3.5293 13.3665 3.23991 13.166 2.97559L14.5195 1.61523L13.9043 1L12.5439 2.35352C12.2796 2.15299 11.9902 2.0026 11.6758 1.90234C11.3659 1.79753 11.0446 1.74512 10.7119 1.74512C10.3063 1.74512 9.91439 1.82259 9.53613 1.97754C9.16243 2.13249 8.83203 2.35352 8.54492 2.64062L7 4.19238L11.3271 8.51953L12.8789 6.97461C13.166 6.6875 13.387 6.3571 13.542 5.9834C13.6969 5.60514 13.7744 5.21322 13.7744 4.80762C13.7744 4.47493 13.722 4.15365 13.6172 3.84375ZM12.7285 5.64844C12.6191 5.91276 12.4619 6.14746 12.2568 6.35254L11.3271 7.28223L8.2373 4.19238L9.16699 3.2627C9.37207 3.05762 9.60677 2.90039 9.87109 2.79102C10.14 2.67708 10.4202 2.62012 10.7119 2.62012C11.0127 2.62012 11.2952 2.67936 11.5596 2.79785C11.8239 2.91178 12.054 3.06901 12.25 3.26953C12.4505 3.46549 12.6077 3.69564 12.7217 3.95996C12.8402 4.22428 12.8994 4.50684 12.8994 4.80762C12.8994 5.09928 12.8424 5.37956 12.7285 5.64844ZM7.9043 10.6416L9.3877 9.09668L8.77246 8.47461L7.28223 10.0264L5.42285 8.16699L6.91309 6.61523L6.29102 6L4.80762 7.54492L4.19238 6.92969L2.64062 8.47461C2.35352 8.76172 2.13249 9.0944 1.97754 9.47266C1.82259 9.84635 1.74512 10.236 1.74512 10.6416C1.74512 10.9743 1.79525 11.2979 1.89551 11.6123C2.00033 11.9222 2.15299 12.2093 2.35352 12.4736L1 13.834L1.61523 14.4492L2.97559 13.0957C3.23991 13.2962 3.52702 13.4489 3.83691 13.5537C4.15137 13.654 4.47493 13.7041 4.80762 13.7041C5.21322 13.7041 5.60286 13.6266 5.97656 13.4717C6.35482 13.3167 6.6875 13.0957 6.97461 12.8086L8.51953 11.2568L7.9043 10.6416ZM5.6416 12.665C5.37728 12.7744 5.09928 12.8291 4.80762 12.8291C4.50684 12.8291 4.22201 12.7721 3.95312 12.6582C3.6888 12.5443 3.45638 12.3893 3.25586 12.1934C3.0599 11.9928 2.90495 11.7604 2.79102 11.4961C2.67708 11.2272 2.62012 10.9424 2.62012 10.6416C2.62012 10.3499 2.6748 10.0719 2.78418 9.80762C2.89811 9.53874 3.05762 9.30176 3.2627 9.09668L4.19238 8.16699L7.28223 11.2568L6.35254 12.1865C6.14746 12.3916 5.91048 12.5511 5.6416 12.665Z" fill="#F48771"/>
+                    </svg>
+                    <h5>Logout</h5>
+                </div>
+                <div class="close-modal" style="cursor: pointer;">
+                    <span>&times;</span>
+                </div>
+            </div>
+            <div class="logout-content">
+                <div class="logout-confirm">
+                    <span class="logout-expression">🤔</span>
+                    <h3> Are you sure you want to logout ? </h3>
+                </div>
+                <div class="logout-action">
+                    <button class="action-btn not-now">Not Now</button>
+                    <button class="action-btn fill logout-continue">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mailer">
+        <div class="mail modal">
+            <h3>Contact, <span class="currentMailee">User</span></h3>
+            <p>Note: All email made across this platform is accountable to the mailer as the ACTION PLAYER</p>
+            <div class="mail-form">
+                <input type="text" name="subject" id="mailSubject" placeholder="Your Subject" value="Greetings!">
+                <textarea name="body" id="mailBody" placeholder="Your Mail Body Here..." value="">Hi, Over there</textarea>
+                <button class="submit-mail" value="">Mail</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js" defer></script>
 </body>
 </html>

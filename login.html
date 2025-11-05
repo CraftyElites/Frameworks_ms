@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            width: 100%;
+            height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .load-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to bottom, #790024, #470012);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #fff;
+            gap: 1em;
+            visibility: hidden;
+            opacity: 0;
+            z-index: 20;
+        }
+        .load-screen.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .login {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to bottom, #790024, #470012);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #fff;
+            gap: 1em;
+            visibility: hidden;
+            opacity: 0;
+            z-index: 10;
+        }
+        .login.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        strong {
+            color: #ebc003;
+        }
+        .login-form {
+            width: 100%;
+            max-width: 500px;
+            height: 70dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2em;
+            border: 1px solid #fff;
+            border-radius: 20px;
+            padding: 2em;
+        }
+        .input-item {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1em;
+        }
+        .input-item span {
+            font-size: 1em;
+            font-style: italic;
+        }
+        .input-item input {
+            padding: 1.5em 1em;
+            border-radius: 50em;
+            background-color: #20010928;
+            border: 1px solid #ffffff31;
+            color: #fff;
+        }
+        .input-item input:focus {
+            outline: 1px solid #ebc003;
+        }
+        .login-submit {
+            text-align: center;
+            width: 100%;
+            padding: 1.5em;
+            border-radius: 0.5em;
+            background-color: #ebc003;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+        }
+        .login-submit.disabled {
+            cursor: not-allowed;
+            background-color: #aaa;
+            color: #5a5959;
+        }
+        .app {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 0;
+            overflow: hidden;
+            visibility: hidden;
+            opacity: 0;
+        }
+        .app.active {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="load-screen active">
+        <svg xmlns='http://www.w3.org/2000/svg' version='1.1' width="45" height="45" viewBox="0 0 10 10">
+	<style>
+    circle {
+      animation: ball 0.6s linear infinite;
+    }
+
+    circle:nth-child(2) { animation-delay: 0.075s; }
+    circle:nth-child(3) { animation-delay: 0.15s; }
+    circle:nth-child(4) { animation-delay: 0.225s; }
+    circle:nth-child(5) { animation-delay: 0.3s; }
+    circle:nth-child(6) { animation-delay: 0.375s; }
+    circle:nth-child(7) { animation-delay: 0.45s; }
+    circle:nth-child(8) { animation-delay: 0.525s; }
+
+    @keyframes ball {
+      from { opacity: 1; }
+      to { opacity: 0.3; }
+    }
+	</style>
+	<g style="fill:grey;">
+		<circle cx='5' cy='1' r='1' style='opacity:0.3;' />
+		<circle cx='7.8284' cy='2.1716' r='1' style='opacity:0.3;' />
+		<circle cx='9' cy='5' r='1' style='opacity:0.3;' />
+		<circle cx='7.8284' cy='7.8284' r='1' style='opacity:0.3;' />
+		<circle cx='5' cy='9' r='1' style='opacity:0.3;' />
+		<circle cx='2.1716' cy='7.8284' r='1' style='opacity:0.3;' />
+		<circle cx='1' cy='5' r='1' style='opacity:0.3;' />
+		<circle cx='2.1716' cy='2.1716' r='1' style='opacity:0.3;' />
+	</g>
+        </svg>
+
+    </div>
+    <div class="login">
+        <h2>Get In <strong>Touch!</strong></h2>
+        <form class="login-form">
+            <div class="input-item">
+                <span>Email</span>
+                <input type="email" class="email" placeholder="Your Email..." name="email">
+            </div>
+            <div class="input-item">
+                <span>Password</span>
+                <input type="password" class="password" placeholder="Your Password..." name="password">
+            </div>
+            <div type="submit" class="login-submit disabled">Proceed!</div>
+        </form>
+
+        <span class="login-footer">@ Card Like Vision 2025</span>
+    </div>
+    <div class="app">
+        <iframe src="index.html" style="width: 100%; height: 100dvh; border: none; scrollbar-width: none;"></iframe>
+    </div>
+    <script>
+        const data = `
+            [
+                {
+        "id" : 1,
+        "name": "Neptune Global",
+        "email": "neptuneglobal@gmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "logo1.jpg",
+        "followers" : "1K",
+        "following" : "34",
+        "bio" : "I'm made for prototyping",
+        "plainPassword": "victory10",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :3,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    },
+        {
+        "id" : 2,
+        "name": "John Doe",
+        "email": "me@gmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "logo2.webp",
+        "followers" : "1.2K",
+        "following" : "100k",
+        "bio" : "I'm made for prototyping",
+        "plainPassword": "none$",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :3,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    },
+    {
+        "id" : 3,
+        "name": "Zion Bridge",
+        "email": "zionbridge@gmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "images (7).jpeg",
+        "followers" : "3.5K",
+        "following" : "100k",
+        "bio" : "A Trademark for communication & leadership",
+        "plainPassword": "g00dT1me.",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    },
+    
+        {
+        "id" : 4,
+        "name": "Optimate Prime",
+        "email": "optimateprime@gmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "logo2.webp",
+        "followers" : "1.2K",
+        "following" : "100k",
+        "bio" : "I'm made for prototyping",
+        "plainPassword": "oprating",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :3,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    },
+        
+        {
+        "id" : 5,
+        "name": "Living Global",
+        "email": "livingglobal@gmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "logo2.webp",
+        "followers" : "1.2K",
+        "following" : "100k",
+        "bio" : "I'm made for prototyping",
+        "plainPassword": "glory",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :3,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    },
+        {
+        "id" : 6,
+        "name": "Living Studio",
+        "email": "livingstudio@gmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "logo2.webp",
+        "followers" : "1.2K",
+        "following" : "100k",
+        "bio" : "I'm made for prototyping",
+        "plainPassword": "god studio",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :3,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    },
+        {
+        "id" : 7,
+        "name": "Leviss LTD",
+        "email": "levissldtgmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "logo2.webp",
+        "followers" : "1.2K",
+        "following" : "100k",
+        "bio" : "I'm made for prototyping",
+        "plainPassword": "lenovo",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :3,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    }
+            ]
+        `;
+           
+        const dataParsed = JSON.parse(data);
+        const emailInput = document.querySelector('.email');
+        const passwordInput = document.querySelector('.password');
+        const submitBtn = document.querySelector('.login-submit');
+        const loginSection = document.querySelector('.login');
+        const mainApp = document.querySelector('.app')
+
+        let submitActive = false;
+
+        function userAuth() {
+            try {
+                const currentUser = localStorage.getItem('currentUser');
+                if(!currentUser) {
+                    loginSection.classList.add('active');
+                    mainApp.classList.remove('active');
+                    console.log(JSON.parse(currentUser));
+                } else {
+                    loginSection.classList.remove('active');
+                    mainApp.classList.add('active');
+                    console.log(JSON.parse(currentUser));
+                }
+            } catch(error) {
+
+            };
+        }
+
+        function handleLogin() {
+            try {
+                emailText = emailInput.value;
+                passwordPlain = passwordInput.value;
+                const existingEmails = dataParsed.filter(u => u.email === emailText);
+                if(existingEmails) {
+                    console.log(existingEmails[0].plainPassword);
+                }
+                
+
+                if(!existingEmails && !passwordPlain === existingEmails[0].plainPassword) {
+                    console.log(emailText, passwordPlain);
+                    submitActive = false;
+                    handleSubmit();
+                    
+                } else {
+                    console.log(emailText, passwordPlain);
+                    submitActive = true;
+                    handleSubmit();
+                    
+                    if(existingEmails && passwordPlain === existingEmails[0].plainPassword){
+                        submitBtn.addEventListener('click', () => {
+                            loginSection.classList.remove('active');
+                            localStorage.setItem('currentUser', JSON.stringify(existingEmails[0]));
+                            localStorage.setItem('database', JSON.stringify(data));
+                            mainApp.classList.add('active');
+                            console.log(JSON.stringify(existingEmails[0]));
+                        });
+                    } else {
+                        submitBtn.addEventListener('click', () => {
+                            console.log('Invalid Credentials!');
+                        });
+                    }
+                }
+                
+            } catch(e) {
+                console.error('Login Error', e)
+            }
+        }
+        function handleSubmit() {
+            if(submitActive === false) {
+                submitBtn.classList.add('disabled');
+                console.log('disabled');
+            } else {
+                submitBtn.classList.remove('disabled');
+                console.log('enabled');
+            }
+        }
+        
+        function setUpEventListener() {
+            emailInput.addEventListener('input', () => {
+                handleLogin();
+            });
+            passwordInput.addEventListener('input', () => {
+                handleLogin();
+            });
+        }
+        function loadScreen() {
+            const loadPlaceholder = document.querySelector('.load-screen');
+            const generalDocument = document.body;
+
+            setTimeout(function () {
+                loadPlaceholder.classList.remove('active');
+                generalDocument.style.opacity = '1';
+                setTimeout(function () {
+                    loadPlaceholder.style.display = 'none';
+                }, 900);
+            }, 2000);
+        }
+        function init() {
+            userAuth();
+            setUpEventListener();
+        }
+        document.addEventListener('DOMContentLoaded', init);
+        window.addEventListener('load', loadScreen);
+    </script>
+</body>
+</html>
+
+<!-- remember: generate a movie editor UI = <div class='wierdo' style='width: 150px; background: #3a443d; height: auto; display: flex; flex-direction: column; gap: 5px; border-radius: 5px;'><img src='../static/download.jpg' alt='Editor' class="gen-i" style="width: 100%; aspect-ratio: 1; border-radius: 5px; object-fit: cover;"><a href="../static/download.jpg" download="mage_gen">Download</a><script>const genI = document.querySelector('.gen-i');const ilink = document.querySelector('.wierdo a');ilink.href = genI.src;ilink.setAttribute('download', 'image_gen');ilink.textContent = '📥 Download';ilink.style.textDecoration = 'none';ilink.style.fontWeight = '700';ilink.style.color = 'yellow'; document.querySelector('.wierdo').appendChild(ilink);</script></div>
+
+{{ url_for('static', filename='download.jpg) }}-->

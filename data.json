@@ -1,0 +1,222 @@
+[
+                {
+        "id" : 1,
+        "name": "Neptune Global",
+        "email": "neptuneglobal@gmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "logo1.jpg",
+        "followers" : "1K",
+        "following" : "34",
+        "bio" : "I'm made for prototyping",
+        "plainPassword": "victory10",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :3,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    },
+        {
+        "id" : 2,
+        "name": "John Doe",
+        "email": "me@gmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "logo2.webp",
+        "followers" : "1.2K",
+        "following" : "100k",
+        "bio" : "I'm made for prototyping",
+        "plainPassword": "none$",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :3,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    },
+    {
+        "id" : 3,
+        "name": "Zion Bridge",
+        "email": "zionbridge@gmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "images (7).jpeg",
+        "followers" : "3.5K",
+        "following" : "100k",
+        "bio" : "A Trademark for communication & leadership",
+        "plainPassword": "g00dT1me.",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    },
+    
+        {
+        "id" : 4,
+        "name": "Optimate Prime",
+        "email": "optimateprime@gmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "logo2.webp",
+        "followers" : "1.2K",
+        "following" : "100k",
+        "bio" : "I'm made for prototyping",
+        "plainPassword": "oprating",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :3,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    },
+        
+        {
+        "id" : 5,
+        "name": "Living Global",
+        "email": "livingglobal@gmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "logo2.webp",
+        "followers" : "1.2K",
+        "following" : "100k",
+        "bio" : "I'm made for prototyping",
+        "plainPassword": "glory",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :3,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    },
+        {
+        "id" : 6,
+        "name": "Living Studio",
+        "email": "livingstudio@gmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "logo2.webp",
+        "followers" : "1.2K",
+        "following" : "100k",
+        "bio" : "I'm made for prototyping",
+        "plainPassword": "god studio",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :3,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    },
+        {
+        "id" : 7,
+        "name": "Leviss LTD",
+        "email": "levissldtgmail.com",
+        "number": "+2348084443954",
+        "profileImage" : "logo2.webp",
+        "followers" : "1.2K",
+        "following" : "100k",
+        "bio" : "I'm made for prototyping",
+        "plainPassword": "lenovo",
+    
+        "post" : [
+            {
+                "id" :1,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :2,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            },
+            {
+                "id" :3,
+                "userId" : "1",
+                "title" : "travel experience",
+                "imageUrl" : "download.jpeg" 
+            }
+        ]
+    }
+]
